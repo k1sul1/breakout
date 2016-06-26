@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Pong</title>
+    <style>
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html{
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0; 
+      }
+      body{
+        background: #222;
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+        width: 100%;
+        margin: 0; 
+        padding: 0;
+      }
+
+      .ball{
+        height: 5px;
+        width: 5px;
+        border-radius: 5px; 
+        background: red;
+        position: absolute;
+      }
+
+      .bar{
+        position: absolute;
+        transition: 0.05s;
+      }
+
+      .bar__part{
+        background: #fff;
+        width: 20px;
+        height: 20px;
+        transition: 0.1s;
+        display: inline-block;
+      }
+
+      .row{
+        overflow: hidden;
+        min-height: 15px;
+        margin-bottom: 5px;
+      }
+
+      .brick-container{
+        margin-left: auto; 
+        margin-right: auto; 
+        position: relative;
+        overflow: hidden;
+      }
+
+      .brick{
+        height: 15px;
+        display: inline-block;
+        background: white; 
+        padding: .5%;
+        position: absolute;
+      }
+
+      .brick.damaged{
+        background: red;
+      }
+      
+    </style>
+  </head>
+
+  <body>
+    <script src="game.js"></script>
+  </body>
+</html>
