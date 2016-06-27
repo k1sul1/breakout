@@ -162,54 +162,45 @@ class Pong {
   }
 
   bindControls(){
-    window.addEventListener("keydown", (event) => {
+  
+  	this.keydown = {};
 
-        switch(event.keyCode){
-          case 37:
-          // left
-          this.move("left");
-          break; 
+    const onKeydown = e => {
+      this.keydown[e.which] = true;
+    }
 
-          case 38: 
-          // up
-          this.move("up");
-          break;
+    const onKeyup = e => {
+      this.keydown[e.which] = false;
+    }
 
-          case 39: 
-          // right
-          this.move("right");
-          break; 
-
-          case 40:
-          // down
-          this.move("down");
-          break; 
-      }
-    });
-      
+    window.addEventListener('keydown', onKeydown);
+    window.addEventListener('keyup', onKeyup);
+    
   }
 
   move(dir){
     const allowed = ["up", "down", "left", "right"];
-
-    if(allowed.indexOf(dir) !== -1){
-      
+    
+    console.clear(); 
+    console.log(this.keydown);
+    
+    if(allowed.indexOf(dir) !== -1){     
 
       switch(dir){
         case "up": 
-          this.top = this.top - 30; 
+          this.top = this.top - 10; 
         break; 
 
         case "down": 
-          this.top = this.top + 30; 
+          this.top = this.top + 10; 
         break; 
 
         case "left": 
-          this.left = this.left - 30; 
+          this.left = this.left - 10; 
         break; 
 
         case "right": 
-          this.left = this.left + 30; 
+          this.left = this.left + 10; 
         break; 
       }
     } 
@@ -220,17 +211,37 @@ class Pong {
 
   }
 
-  play(){
+  render(){
+  
+  	if(this.keydown['37'] === true){
+      this.move("left")
+    }
+
+    if(this.keydown['38'] === true){
+      this.move("up")
+    }
+
+    if(this.keydown['39'] === true){
+      this.move("right")
+    }
+
+    if(this.keydown['40'] === true){
+      this.move("down")
+    }
 
 
     this.bar.style.top = this.top + "px"; 
     this.bar.style.left = this.left + "px";
-
+    
+    //this.keydown = {};
+    
     this.moveBall();
-
+    
+    
     requestAnimationFrame(() => {
-      this.play(); // move physics logic to a proper game loop
+      this.render();
     });
+
 
   }
 
@@ -238,13 +249,8 @@ class Pong {
 
   }
 
-  run(){
-    this._interval = setInterval(() => {
-
-    }, 1000 / this.fps); 
-  }
 }
 
 const Game = new Pong();
+Game.render();
 
-Game.play();
